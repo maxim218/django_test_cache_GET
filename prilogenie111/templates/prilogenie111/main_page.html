@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+
+<h1>Главная страница</h1>
+
+<p>Первая строка</p>
+<input type = 'text' id = 'field_1'>
+<p>Вторая строка</p>
+<input type = 'text' id = 'field_2'>
+<br>
+<br>
+<br>
+<button id = "btn_1" onclick = "f1()">Сумма без кеширования</button>
+<br>
+<br>
+<button id = "btn_2" onclick = "f2()">Сумма с кешированием</button>
+<br>
+
+<script>
+    function getQuery(url) {
+        let r = new XMLHttpRequest();
+        r.open("GET", url, true);
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+                const answer = r.responseText;
+                r = null;
+                alert(answer);
+            }
+        }
+    }
+
+    function element(id) {
+        return document.getElementById(id.toString());
+    }
+
+    function f1() {
+        const v1 = element("field_1").value;
+        const v2 = element("field_2").value;
+        const url = "/qqq111/?a=" + v1 + "&b=" + v2;
+        getQuery(url);
+    }
+
+    function f2() {
+        const v1 = element("field_1").value;
+        const v2 = element("field_2").value;
+        const url = "/qqq222/?a=" + v1 + "&b=" + v2;
+        getQuery(url);
+    }
+</script>
+
+</body>
+</html>
